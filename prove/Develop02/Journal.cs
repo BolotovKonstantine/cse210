@@ -4,12 +4,20 @@
     
     public void DisplayAll()
     {
-        foreach (Entry entry in _entries)
+        if (_entries != null)
+            foreach (Entry entry in _entries)
+            {
+                entry.Display();
+                Console.WriteLine();
+            }
+        else
         {
-            entry.Display();
-            Console.WriteLine();
+            Console.WriteLine("Journal is Empty");
         }
+        
     }
+    
+    
 
     public void AddEntry(Entry newEntry)
     {
@@ -65,7 +73,7 @@
             {
                 if (string.IsNullOrWhiteSpace(line))
                 {
-                    if (!string.IsNullOrWhiteSpace(entry._date) || !string.IsNullOrWhiteSpace(entry._promptText) || !string.IsNullOrWhiteSpace(entry._entryTextl))
+                    if (string.IsNullOrWhiteSpace(entry._date) || !string.IsNullOrWhiteSpace(entry._promptText) || !string.IsNullOrWhiteSpace(entry._entryTextl))
                     {
                         // Add to the list
                         AddEntry(entry);
