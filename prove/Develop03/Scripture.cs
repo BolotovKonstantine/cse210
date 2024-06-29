@@ -17,12 +17,17 @@
     public void HideRandomWords(int numberToHide)
     {
         Random random = new Random();
-        List<Word> hiddenWords = _words.Where(w => !w.IsHidden()).ToList();
+        List<Word> unhiddenWords = _words.Where(w => !w.IsHidden()).ToList();
+        if (numberToHide > unhiddenWords.Count)
+        {
+            numberToHide = unhiddenWords.Count;
+        }
+            
         for (int i = 0; i < numberToHide; i++)
         {
-            int index = random.Next(hiddenWords.Count);
-            hiddenWords[index].Hide();
-            hiddenWords.RemoveAt(index);
+            int index = random.Next(unhiddenWords.Count);
+            unhiddenWords[index].Hide();
+            unhiddenWords.RemoveAt(index);
         }
     }
 
@@ -34,7 +39,7 @@
             displayText += word.GetDisplayText() + " ";
         }
 
-        return displayText.Trim();
+        return $"{_reference.GetDisplayText()} {displayText.Trim()}";
     }
 
     public bool IsCompletelyHidden()
