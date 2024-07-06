@@ -16,6 +16,12 @@ public class Activity
         Console.WriteLine($"Welcome to the {_name} Activity");
         Console.WriteLine(Environment.NewLine);
         Console.WriteLine(_description);
+        Console.Write($"How long, in seconds, would you like " +
+                      $"for your session? ");
+        int.TryParse(Console.ReadLine(), out _duration);
+        Console.Clear();
+        Console.WriteLine($"Starting the {_name} Activity...");
+        ShowSpinner(3);
     }
 
     public void DisplayEndingMessage()
@@ -24,6 +30,8 @@ public class Activity
         ShowSpinner(3);
         Console.WriteLine($"You have completed another {_duration} seconds" +
                           $" of the {_name} Activity");
+        ShowSpinner(4);
+        Console.Clear();
     }
 
     public void ShowSpinner(int seconds)

@@ -30,27 +30,54 @@ public class ReflectingActivity : Activity
 
  public void Run()
  {
-  
+  DisplayStartingMessage();
+  Console.WriteLine("Consider the following prompt:");
+  DisplayPrompt();
+  Console.ReadLine();
+  Console.WriteLine("Now ponder on each of the following questions as they related to this experience.");
+  Console.Write("You may begin in: ");
+  ShowCountDown(5);
+  Console.Clear();
+  int cycles = _duration / 10;
+  for (int i = 0; i < cycles; i++)
+  {
+   DisplayQuestions();
+   Thread.Sleep(10000);
+  }
+  DisplayEndingMessage();
  }
 
  public string GetRandomPrompt()
  {
-  return "";
+  Random random = new Random();
+  int index = random.Next(_prompts.Count);
+  return _prompts[index];
  }
 
  public string GetRandomQuestion()
  {
-  return "";
+  if (_questions.Count == 0)
+  {
+   throw new InvalidOperationException("No more questions to ask.");
+  }
+  
+  Random random = new Random();
+  int index = random.Next(_questions.Count);
+
+  string question = _questions[index];
+  _questions.RemoveAt(index);
+  return question;
  }
 
  public void DisplayPrompt()
  {
-  
+  Console.WriteLine($" --- {GetRandomPrompt()} ---");
+  Console.WriteLine("When you have something in mind, press enter to continue. ");
  }
 
  public void DisplayQuestions()
  {
-  
+  Console.WriteLine($"> {GetRandomQuestion()}");
  }
  
 }

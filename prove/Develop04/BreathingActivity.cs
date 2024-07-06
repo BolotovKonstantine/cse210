@@ -9,12 +9,6 @@ public class BreathingActivity : Activity
     public void Run()
     {
         DisplayStartingMessage();
-        Console.Write($"How long, in seconds, would you like " +
-                          $"for your session? ");
-        int.TryParse(Console.ReadLine(), out _duration);
-        Console.Clear();
-        Console.WriteLine("Starting the Breathing Activity...");
-        ShowSpinner(5);
         int cycles = _duration / 10;
         for (int i = 0; i < cycles; i++)
         {
