@@ -1,8 +1,8 @@
 ﻿public abstract class Goal
 {
-    private string _shortName;
-    private string _description;
-    private string _points;
+    protected string _shortName;
+    protected string _description;
+    protected string _points;
 
     public Goal(string shortName, string description, string points)
     {
@@ -17,6 +17,13 @@
 
     public string GetDetailsString()
     {
-        return $"Goal: {_shortName}\nDescription: {_description}\nPoints: {_points}";
+        if (IsComplete())
+        {
+            return $"[X] {_shortName} ({_description})";
+        }
+        else
+        {
+            return $"[ ] {_shortName} ({_description})";
+        }
     }
 }
