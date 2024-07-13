@@ -11,6 +11,14 @@ public class GoalManager
 
    public void Start()
    {
+      Console.Write("Enter your Username: ");
+      string username = Console.ReadLine();
+      User user = new User(username, _score);
+      if (! user.IsNewUser())
+      {
+         user.LoadFromFile();
+         _score = user._score;
+      }
       int choice = 0;
       while (choice != 6)
       {
@@ -45,6 +53,9 @@ public class GoalManager
          }
          
       }
+
+      user._score = _score;
+      user.Save();
    }
 
    public void DisplayPlayerInfo()
