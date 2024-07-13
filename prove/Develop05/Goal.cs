@@ -2,7 +2,7 @@
 {
     protected string _shortName;
     protected string _description;
-    protected string _points;
+    public string _points;
 
     public Goal(string shortName, string description, string points)
     {
@@ -15,7 +15,7 @@
     public abstract bool IsComplete();
     public abstract string GetStringRepresentation();
 
-    public string GetDetailsString()
+    public virtual string GetDetailsString()
     {
         if (IsComplete())
         {

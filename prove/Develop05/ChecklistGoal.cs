@@ -22,12 +22,19 @@ public class ChecklistGoal : Goal
 
     public override string GetStringRepresentation()
     {
-        return $"{_shortName} ({_description}) - {_points} points";
+        return $"C,{_shortName},{_description},{_points},{_target},{_bonus},{_amountCompleted}";
     }
 
-    public string GetDetailsString()
+    public override string GetDetailsString()
     {
-        return "";
+        if (IsComplete())
+        {
+            return $"[X] {_shortName} ({_description}) - currently complete {_amountCompleted}/{_target}";
+        }
+        else
+        {
+            return $"[ ] {_shortName} ({_description}) - currently complete {_amountCompleted}/{_target}";
+        };
     }
     
 }
