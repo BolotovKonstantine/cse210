@@ -1,0 +1,44 @@
+@startuml
+'https://plantuml.com/class-diagram
+class Event {
+_title: string
+_description: string
+_date: string
+_time: string
+_address: Address
+Event(title, description, date, time, address)
+DisplayStdDetails(): string
+DisplayStdDetails(): string
+}
+class Lectures {
+_speaker: string
+_capcity: string
+Lectures(title, description, date, time, address, speaker, capcity)
+FullDetais(): string
+}
+class Receptions {
+_email: string
+Receptions(title, description, date, time, address, email)
+FullDetais(): string
+}
+class Outdoor {
+_weather: string
+public Outdoor(title, description, date, time, address, weather)
+FullDetais(): string
+}
+
+class Address {
+_street: string
+_city: string
+_state: string
+_country: string
+
+Address( street, city, state, country)
+FromUS(): bool
+DisplayAddress(): string
+}
+
+Event <|-- Outdoor
+Event <|-- Receptions
+Event <|-- Lectures
+@enduml
