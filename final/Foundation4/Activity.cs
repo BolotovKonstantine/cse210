@@ -1,31 +1,32 @@
-﻿public abstract class Activity
-{
-    protected DateTime _date;
-    protected double _duration;
+﻿public abstract class Activity {
+    protected DateTime _activityDate;
+    protected double _activityLength;  // In Minutes
 
-    public Activity(DateTime date, double duration)
-    {
-        _date = date;
-        _duration = duration;
+    public Activity(DateTime activityDate, double activityLength) {
+        _activityDate = activityDate;
+        _activityLength = activityLength;
     }
 
-    public virtual double GetDistance()
-    {
-        return 0; // no distance in generic activity
+    public abstract double GetDistanceKm();
+    public abstract double GetSpeedKmph();
+
+    public double GetDistanceMiles() {
+        return GetDistanceKm() * 0.62;
     }
 
-    public double GetSpeed()
-    {
-        return (this.GetDistance() / _duration) * 60; // speed = distance/time, and convert it to per hour
+    public double GetSpeedMph() {
+        return GetSpeedKmph() * 0.62;
     }
 
-    public double GetPace()
-    {
-        return _duration / this.GetDistance(); // pace = time/distance
+    public double GetPaceMinPerKm() {
+        return _activityLength / GetDistanceKm();
     }
 
-    public virtual string GetSummary()
-    {
-        return $"{_date:dd MMM yyyy} Activity ({_duration} min) - Distance: {GetDistance():F2} km, Speed: {GetSpeed():F2} kph, Pace: {GetPace():F2} min per km";
+    public double GetPaceMinPerMile() {
+        return _activityLength / GetDistanceMiles();
+    }
+
+    public virtual string GetSummary() {
+        return $"{_activityDate:dd MMM yyyy} {GetType().Name} ({_activityLength} min) - Distance: {GetDistanceKm()} km / {GetDistanceMiles():0.00} miles, Speed: {GetSpeedKmph()} kph / {GetSpeedMph():0.00} mph, Pace: {GetPaceMinPerKm():0.00} min per km / {GetPaceMinPerMile():0.00} min per mile";
     }
 }

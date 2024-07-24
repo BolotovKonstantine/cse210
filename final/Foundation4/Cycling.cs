@@ -1,19 +1,15 @@
-﻿public class Cycling : Activity
-{
-    private double _speed; // in kilometers per hour
+﻿public class Cycling : Activity {
+    private double _speed; // In Kph
 
-    public Cycling(DateTime date, double duration, double speed) : base(date, duration)
-    {
+    public Cycling(DateTime activityDate, double activityLength, double speed): base(activityDate, activityLength) {
         _speed = speed;
     }
 
-    public override double GetDistance()
-    {
-        return (_speed * _duration) / 60; // distance = speed * time, and convert it to kilometers
+    public override double GetSpeedKmph() {
+        return _speed;
     }
 
-    public override string GetSummary()
-    {
-        return base.GetSummary().Replace("Activity", "Cycling");
+    public override double GetDistanceKm() {
+        return (_speed / 60) * _activityLength;
     }
 }
